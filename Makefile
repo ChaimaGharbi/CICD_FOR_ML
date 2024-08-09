@@ -31,7 +31,7 @@ hf_login:
 
 push_hub:
 	huggingface-cli upload ChaimaGharbi/Drug-Classification ./App --repo-type=space --commit-message="Sync App files"
-	huggingface-cli upload ChaimaGharbi/Drug-Classification ./Model /Model --repo-type=space -commit-message="Sync Model"
+	huggingface-cli upload ChaimaGharbi/Drug-Classification ./Model /Model --repo-type=space --commit-message="Sync Model"
 	huggingface-cli upload ChaimaGharbi/Drug-Classification ./Metrics --repo-type=space --commit-message="Sync Model"
 
 deploy:
