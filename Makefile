@@ -35,4 +35,4 @@ push_hub:
 	huggingface_cli upload ChaimaGharbi/Drug-Classification ./Metrics --repo-type=space --commit-message="Sync Model"
 
 deploy:
-	hg-login push-hub
+	hf-login push-hub
