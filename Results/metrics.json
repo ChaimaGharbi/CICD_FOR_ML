@@ -1,4 +1,4 @@
 {
-  "Accuracy": 0.97,
-  "F1 Score": 0.92
+    "Accuracy": 0.98,
+    "F1 Score": 0.95
 }

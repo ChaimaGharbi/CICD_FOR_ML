@@ -1,3 +1,6 @@
+include .env
+export $(shell sed 's/=.*//' .env)
+
 install:
 	pip install --upgrade pip &&\
 		pip install -r requirements.txt
@@ -8,32 +11,32 @@ format:
 train: 
 	python train.py
 
-eval:
-	echo "## Model Metrics" > report.md
-	cat ./Results/metrics.txt >> report.md
-
-	echo '\n## Confusion Matrix Plot' >> report.md
-	echo '![Confusion Matrix](./Results/model_results.png)' >> report.md
-
-	cml comment create report.md
-
 update-branch: 
-	git config --global user.name $(USER_NAME)
-	git config --global user.email $(USER_EMAIL)
 	git commit -am "Update with new results"
 	git push --force origin HEAD:update
 
 hf_login: 
-	git pull origin update
-	git switch update
 	pip install -U "huggingface_hub[cli]"
-	huggingface-cli login --token $(HF) --add-to-git-credential
+	huggingface-cli login --token $(HUGGINGFACE_HUB) --add-to-git-credential
 
 push_hub:
-	huggingface-cli upload ChaimaGharbi/Drug-Classification ./App --repo-type=model --commit-message="Sync App files"
-#	huggingface-cli upload ChaimaGharbi/Drug-Classification ./Model /Model --repo-type=space --commit-message="Sync Model"
+#	huggingface-cli upload ChaimaGharbi/Drug-Classification ./Model --repo-type=model --commit-message="new model proposition" --revision new_model --create-pr
+	huggingface-cli upload ChaimaGharbi/Drug-Classification ./App /App --repo-type=model --commit-message="Sync Model" --revision main --create-pr --commit-description="$$(cat report.md)"
 #	huggingface-cli upload ChaimaGharbi/Drug-Classification ./Results /Metrics --repo-type=space --commit-message="Sync Model"
 
 deploy:
 	make hf_login
 	make push_hub
+
+experiment_pipeline:
+	make train
+	python compare_metrics.py
+
+generate_report:
+	python compare_metrics.py
+	python generate_report.py
+
+all: generate_report push_hub
+
+update:
+	gh pr create --title "trying git cli" --body "$$(cat report.md)" --base main --head update

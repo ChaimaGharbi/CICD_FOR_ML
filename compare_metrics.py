@@ -23,7 +23,7 @@ def compare_metrics(local_metrics, remote_metrics):
     for key in all_keys:
         local_value = local_metrics.get(key, "N/A")
         remote_value = remote_metrics.get(key, "N/A")
-        comparison[key] = {"Local": local_value, "Remote": remote_value}
+        comparison[key] = {"New": local_value, "Old": remote_value}
     
     return comparison
 
@@ -33,7 +33,7 @@ def generate_report(comparison, report_file):
         f.write("# Metrics Comparison Report\n\n")
         f.write("## Comparison\n")
         for key, values in comparison.items():
-            f.write(f"- **{key}**: Local={values['Local']}, Remote={values['Remote']}\n")
+            f.write(f"- **{key}**: New={values['New']}, Old={values['Old']}\n")
 
 def main():
     remote_url = "https://huggingface.co/ChaimaGharbi/Drug-Classification/raw/main/metrics.json"
