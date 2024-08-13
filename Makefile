@@ -35,6 +35,8 @@ experiment_pipeline:
 generate_report:
 	python compare_metrics.py
 	python generate_report.py
+	git add .
+	git commit -m "added report"
 
 all: generate_report update
 
