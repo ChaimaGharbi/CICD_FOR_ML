@@ -35,10 +35,8 @@ experiment_pipeline:
 generate_report:
 	python compare_metrics.py
 	python generate_report.py
-	git add .
-	git commit -m "report generated"
 
 all: generate_report update
 
 update:
-	gh pr create --title "trying git tcli" --body "$$(cat report.md)" --base main --head update
+	gh pr create --title "trying git cli" --body "$$(cat report.md)" --base main --head update
