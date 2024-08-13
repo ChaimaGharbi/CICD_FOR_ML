@@ -1,5 +1,5 @@
-# Metrics Comparison Report
+## Model Metrics
 
-## Comparison
-- **F1 Score**: Local=0.92, Remote=1.0
-- **Accuracy**: Local=0.97, Remote=1.0
+Accuracy = 0.97, F1 Score = 0.96.
+## Confusion Matrix Plot
+![Confusion Matrix](./Results/model_results.png)
