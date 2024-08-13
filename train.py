@@ -1,3 +1,4 @@
+import json
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
@@ -12,7 +13,7 @@ import skops.io as sio
 
 
 drug_df = pd.read_csv("Data/drug200.csv")
-drug_df = drug_df.sample(frac=1)
+drug_df = drug_df.sample(frac=1, random_state=125)
 drug_df.head(3)
 
 
@@ -20,7 +21,7 @@ X = drug_df.drop("Drug", axis=1).values
 y = drug_df.Drug.values
 
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.3, random_state=125
+    X, y, test_size=0.4,  random_state=125
 )
 
 
@@ -50,8 +51,8 @@ f1 = f1_score(y_test, predictions, average="macro")
 
 print("Accuracy:", str(round(accuracy, 2) * 100) + "%", "F1:", round(f1, 2))
 
-with open("Results/metrics.txt", "w") as outfile:
-    outfile.write(f"\nAccuracy = {round(accuracy, 2)}, F1 Score = {round(f1,2)}.")
+with open("Results/metrics.json", "w") as outfile:
+    json.dump({"Accuracy": round(accuracy, 2), "F1 Score": round(f1, 2)}, fp=outfile, indent=4)
 
 
 cm = confusion_matrix(y_test, predictions, labels=pipe.classes_)
