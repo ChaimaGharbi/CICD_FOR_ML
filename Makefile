@@ -36,7 +36,7 @@ generate_report:
 	python compare_metrics.py
 	python generate_report.py
 
-all: generate_report push_hub
+all: generate_report update
 
 update:
-	gh pr create --title "trying git cli" --body "$$(cat report.md)" --base main --head update
+	gh pr create --title "trying git cli" --body "$$(cat report.md)" --base update --head main
