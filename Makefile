@@ -21,7 +21,7 @@ hf_login:
 
 push_hub:
 #	huggingface-cli upload ChaimaGharbi/Drug-Classification ./Model --repo-type=model --commit-message="new model proposition" --revision new_model --create-pr
-	huggingface-cli upload ChaimaGharbi/Drug-Classification ./App /App --repo-type=model --commit-message="Sync Model" --revision main --create-pr --commit-description="$$(cat report.md)"
+	huggingface-cli upload ChaimaGharbi/Drug-Classification ./App /App --repo-type=model --commit-message="Sync_Model" --revision main --create-pr --commit-description="$$(cat report.md)"
 #	huggingface-cli upload ChaimaGharbi/Drug-Classification ./Results /Metrics --repo-type=space --commit-message="Sync Model"
 
 deploy:
@@ -35,8 +35,10 @@ experiment_pipeline:
 generate_report:
 	python compare_metrics.py
 	python generate_report.py
+	git add .
+	git commit -m "added report"
 
 all: generate_report update
 
 update:
-	gh pr create --title "trying git cli" --body "$$(cat report.md)" --base update --head main
+	gh pr create --title "trying git" --body-file report.md --base main --head update

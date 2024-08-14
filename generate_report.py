@@ -5,7 +5,7 @@ with open("Results/model_results.png", "rb") as image_file:
   
   
 report_content = f"""
-## Confusion Matrix Plot
+## Confusion Matrix Ploot
 ![Confusion Matrix](data:image/png;base64,{encoded_string})
 """
 
