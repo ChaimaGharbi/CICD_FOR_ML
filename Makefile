@@ -21,7 +21,7 @@ hf_login:
 
 push_hub:
 #	huggingface-cli upload ChaimaGharbi/Drug-Classification ./Model --repo-type=model --commit-message="new model proposition" --revision new_model --create-pr
-	huggingface-cli upload ChaimaGharbi/Drug-Classification ./App /App --repo-type=model --commit-message="Sync Model" --revision main --create-pr --commit-description="$$(cat report.md)"
+	huggingface-cli upload ChaimaGharbi/Drug-Classification ./App /App --repo-type=model --commit-message="Sync_Model" --revision main --create-pr --commit-description="$$(cat report.md)"
 #	huggingface-cli upload ChaimaGharbi/Drug-Classification ./Results /Metrics --repo-type=space --commit-message="Sync Model"
 
 deploy:
