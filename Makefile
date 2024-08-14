@@ -41,4 +41,4 @@ generate_report:
 all: generate_report update
 
 update:
-	gh pr create --title "trying git" --body "$$(cat report.md)" --base main --head update
+	gh pr create --title "trying git" --body-file report.md --base main --head update
